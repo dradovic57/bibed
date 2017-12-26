@@ -2,6 +2,20 @@ var ObjectID = require('mongodb').ObjectID
 
 module.exports = function(app, client) {
   var db = client.db("bibed");
+	app.get('/notes/', (req, res) => {
+//		const id = req.params.id;
+//		const details = {'_id': new ObjectID(id) };
+		db.collection('notes').findOne({}, (err, item) => {
+			if (err) {
+				res.send({ 'error': 'An error has occured' });
+			} else {
+				res.send(item);
+			}
+		});
+	});
+
+module.exports = function(app, client) {
+  var db = client.db("bibed");
 	app.get('/notes/:id', (req, res) => {
 		const id = req.params.id;
 		const details = {'_id': new ObjectID(id) };
