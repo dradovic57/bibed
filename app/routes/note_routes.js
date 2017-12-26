@@ -3,8 +3,6 @@ var ObjectID = require('mongodb').ObjectID
 module.exports = function(app, client) {
   var db = client.db("bibed");
 	app.get('/notes/', (req, res) => {
-//		const id = req.params.id;
-//		const details = {'_id': new ObjectID(id) };
 		db.collection('notes').findOne({}, (err, item) => {
 			if (err) {
 				res.send({ 'error': 'An error has occured' });
@@ -13,6 +11,20 @@ module.exports = function(app, client) {
 			}
 		});
 	});
+	// app.get('/notes/', (req, res) => {
+	// 	db.collection('notes').find({}, (err, myCursor) => {
+	// 		if (err) {
+	// 			res.send({ 'error': 'An error has occured' });
+	// 		} else {
+	// 			// myCursor.forEach(res.send(myCursor.title));
+	// 			item='';
+	// 			while (myCursor.hasNext()) {
+	// 				item+=myCursor.next().text;
+	// 			}
+	// 			res.send(item);
+	// 		}
+	// 	});
+	// });
 
 	app.get('/notes/:id', (req, res) => {
 		const id = req.params.id;
