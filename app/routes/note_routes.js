@@ -14,8 +14,6 @@ module.exports = function(app, client) {
 		});
 	});
 
-module.exports = function(app, client) {
-  var db = client.db("bibed");
 	app.get('/notes/:id', (req, res) => {
 		const id = req.params.id;
 		const details = {'_id': new ObjectID(id) };
